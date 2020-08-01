@@ -1,0 +1,93 @@
+﻿body,
+ul,
+ol,
+li,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+form,
+fieldset,
+table,
+td,
+img,
+div {
+	margin: 0;
+	padding: 0;
+	border: 0
+}
+
+body {
+	color: #333;
+	font-size: 12px;
+	font-family: microsoft yahei
+}
+
+ul,
+ol {
+	list-style-type: none
+}
+
+select,
+input,
+img,
+select {
+	vertical-align: middle
+}
+
+input {
+	font-size: 12px
+}
+
+a {
+	text-decoration: none;
+	color: #000
+}
+
+a:hover {
+	color: #c00;
+	text-decoration: none
+}
+
+.clear {
+	clear: both
+}
+
+.banner {
+	display: block;
+	width: 95%;
+	margin:0 auto;
+	position: absolute;
+	z-index: 10;
+	left: 2.5%;
+	padding-top:0; bottom: 21vh;
+}
+
+.banner .turnplate {
+	display: block;
+	width: 82%;
+	position: relative;
+	margin:0 auto;
+}
+
+.banner .turnplate canvas.item {
+	width: 100%
+}
+
+.banner .turnplate img.pointer {
+	position: absolute;
+	width: 31.5%;
+	height: 42.5%;
+	left: 34.6%;
+	top: 23%
+}
+.luckrw{position: absolute; width: 86%; left: 3%; bottom: 14vh; z-index: 11;}
+.tuopan{position: absolute; width: 30%; left: 35%; bottom: 17vh; z-index: 8;}
+.luck-info{position: absolute; bottom: 4vh; width: 80%; left: 10%; text-align: center;}
+.luck-info p{color: #fff; font-size: 0.375rem; margin-bottom: 10px;}
+.luck-info p font{color: #ffdd52;padding:0 5px;}
+.luck-info div marquee{ color: #fff; background-color: #84b0ff;  display: block; height: 0.8rem; border-radius: 0.4rem;}
+.luck-info div marquee p{margin-bottom: 5px; text-align:center}

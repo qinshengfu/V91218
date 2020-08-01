@@ -1,0 +1,18 @@
+
+SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for `FT_ONLINE_WALLET_REC`
+-- ----------------------------
+DROP TABLE IF EXISTS `FT_ONLINE_WALLET_REC`;
+CREATE TABLE `FT_ONLINE_WALLET_REC` (
+ 		`ONLINE_WALLET_REC_ID` varchar(100) NOT NULL,
+		`GMT_CREATE` varchar(32) DEFAULT NULL COMMENT '创建时间',
+		`GMT_MODIFIED` varchar(32) DEFAULT NULL COMMENT '更新时间',
+		`PD_TYPE` varchar(55) DEFAULT NULL COMMENT '数据类型（中文）',
+		`ORDEROX` varchar(255) DEFAULT NULL COMMENT '交易哈希',
+		`MONEY` varchar(255) DEFAULT NULL COMMENT '金额',
+		`FROM_ADDRESS` varchar(255) DEFAULT NULL COMMENT '转出地址',
+		`TO_ADDRESS` varchar(255) DEFAULT NULL COMMENT '转入地址',
+  		PRIMARY KEY (`ONLINE_WALLET_REC_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;

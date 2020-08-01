@@ -1,0 +1,538 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="AccountMapper">
+    <!--实体类映射-->
+    <resultMap type="MemUser" id="MemUserMap">
+        <id column="ACCOUNT_ID" property="ACCOUNT_ID"/>
+        <result column="GMT_CREATE" property="GMT_CREATE"/>
+        <result column="GMT_MODIFIED" property="GMT_MODIFIED"/>
+        <result column="USER_NAME" property="USER_NAME"/>
+        <result column="LOGIN_PASSWORD" property="LOGIN_PASSWORD"/>
+        <result column="SECURITY_PASSWORD" property="SECURITY_PASSWORD"/>
+        <result column="MAILBOX" property="MAILBOX"/>
+        <result column="INVITATION_CODE" property="INVITATION_CODE"/>
+        <result column="XMC_WALLET" property="XMC_WALLET"/>
+        <result column="USDT_WALLET" property="USDT_WALLET"/>
+        <result column="USDT_COUNT" property="USDT_COUNT"/>
+        <result column="XMC_COUNT" property="XMC_COUNT"/>
+        <result column="HEDGING_USDT" property="HEDGING_USDT"/>
+        <result column="HEDGING_XMC" property="HEDGING_XMC"/>
+        <result column="RECOMMENDED_NUMBER" property="RECOMMENDED_NUMBER"/>
+        <result column="RECOMMENDER" property="RECOMMENDER"/>
+        <result column="RE_PATH" property="RE_PATH"/>
+        <result column="ALGEBRA" property="ALGEBRA"/>
+        <result column="USER_RANK" property="USER_RANK"/>
+        <result column="USER_STATE" property="USER_STATE"/>
+        <result column="TRAM_NUMBER" property="TRAM_NUMBER"/>
+        <result column="TRAM_ACHIEVE" property="TRAM_ACHIEVE"/>
+        <result column="NAME" property="NAME"/>
+        <result column="ALIPAY" property="ALIPAY"/>
+        <result column="BANK_NAME" property="BANK_NAME"/>
+        <result column="BANK_NUMBER" property="BANK_NUMBER"/>
+        <result column="HOLDER" property="HOLDER"/>
+        <result column="USDT_SITE" property="USDT_SITE"/>
+        <result column="PHONE" property="PHONE"/>
+        <result column="IS_SIGN_IN" property="IS_SIGN_IN"/>
+        <result column="USDT_WALLET_BALANCE" property="USDT_WALLET_BALANCE"/>
+        <result column="PAYMENT" property="PAYMENT"/>
+        <result column="GLOBAL_TIME" property="GLOBAL_TIME"/>
+        <result column="CASH_SITE" property="CASH_SITE"/>
+        <result column="XMC_SITE" property="XMC_SITE"/>
+        <result column="INVEST_NUMBER" property="INVEST_NUMBER"/>
+        <result column="INVITA_COD" property="INVITA_COD"/>
+        <result column="EFFECTIVE_MEMBER" property="EFFECTIVE_MEMBER"/>
+    </resultMap>
+
+    <!--表名 -->
+    <sql id="tableName">
+		"FT_ACCOUNT"
+	</sql>
+
+    <!-- 字段 -->
+    <sql id="Field">
+		"GMT_CREATE",	
+		"GMT_MODIFIED",	
+		"USER_NAME",	
+		"LOGIN_PASSWORD",	
+		"SECURITY_PASSWORD",	
+		"MAILBOX",	
+		"INVITATION_CODE",	
+		"XMC_WALLET",	
+		"USDT_WALLET",	
+		"USDT_COUNT",
+		"XMC_COUNT",
+		"HEDGING_USDT",	
+		"HEDGING_XMC",	
+		"RECOMMENDED_NUMBER",	
+		"RECOMMENDER",	
+		"RE_PATH",	
+		"ALGEBRA",	
+		"USER_RANK",	
+		"USER_STATE",	
+		"TEAM_AMOUNT",
+		"TEAM_ACHIEVE",
+		"NAME",	
+		"ALIPAY",	
+		"BANK_NAME",	
+		"BANK_NUMBER",	
+		"HOLDER",
+		"USDT_SITE",
+		"PHONE",
+		"PAYMENT",
+		"IS_SIGN_IN",
+		"USDT_WALLET_BALANCE",
+		"GLOBAL_TIME",
+		"ACCUMULA",
+		"CASH_SITE",
+		"XMC_SITE",
+		"INVEST_NUMBER",
+		"INVITA_COD",
+		"EFFECTIVE_MEMBER",
+		"ACCOUNT_ID"
+	</sql>
+
+    <!-- 字段值 -->
+    <sql id="FieldValue">
+			#{GMT_CREATE},	
+			#{GMT_MODIFIED},	
+			#{USER_NAME},	
+			#{LOGIN_PASSWORD},	
+			#{SECURITY_PASSWORD},	
+			#{MAILBOX},	
+			#{INVITATION_CODE},	
+			#{XMC_WALLET},	
+			#{USDT_WALLET},	
+			#{USDT_COUNT},
+			#{HEDGING_USDT},
+			#{HEDGING_USDT},	
+			#{HEDGING_XMC},	
+			#{RECOMMENDED_NUMBER},	
+			#{RECOMMENDER},	
+			#{RE_PATH},	
+			#{ALGEBRA},	
+			#{USER_RANK},	
+			#{USER_STATE},	
+			#{TEAM_AMOUNT},
+			#{TEAM_ACHIEVE},
+			#{NAME},	
+			#{ALIPAY},	
+			#{BANK_NAME},	
+			#{BANK_NUMBER},	
+			#{HOLDER},
+			#{USDT_SITE},
+			#{PHONE},
+			#{PAYMENT},
+			#{IS_SIGN_IN},
+			#{USDT_WALLET_BALANCE},
+			#{GLOBAL_TIME},
+			#{ACCUMULA},
+			#{CASH_SITE},
+			#{XMC_SITE},
+			#{INVEST_NUMBER},
+			#{INVITA_COD},
+			#{EFFECTIVE_MEMBER},
+			#{ACCOUNT_ID}
+	</sql>
+
+    <!-- 新增-->
+    <insert id="save" parameterType="pd">
+        insert into
+        <include refid="tableName"></include>
+        (
+        <include refid="Field"></include>
+        ) values (
+        <include refid="FieldValue"></include>
+        )
+    </insert>
+
+    <!-- 删除-->
+    <delete id="delete" parameterType="pd">
+        delete from
+        <include refid="tableName"></include>
+        where
+        "ACCOUNT_ID" = #{ACCOUNT_ID}
+    </delete>
+
+    <!-- 清空所有数据，保留顶点账号-->
+    <delete id="deleteAllData" parameterType="pd">
+        delete from
+        <include refid="tableName"/>
+        where
+        "ACCOUNT_ID" != '10000'
+    </delete>
+
+    <!-- 修改 -->
+    <update id="edit" parameterType="pd">
+        update
+        <include refid="tableName"></include>
+        set
+        <foreach item="item" collection="_parameter.keys"
+                 separator="," close="">
+            <if test="item != null and item != '' ">
+                ${item} = #{[${item}]}
+            </if>
+        </foreach>
+        where
+        "ACCOUNT_ID" = #{ACCOUNT_ID}
+    </update>
+
+    <!-- 更新团队人数 -->
+    <update id="updateTeamAmount" parameterType="pd">
+        update
+        <include refid="tableName"/>
+        set
+        "TEAM_AMOUNT" = "TEAM_AMOUNT" + 1
+        where
+        "ACCOUNT_ID" in (${RE_PATH})
+    </update>
+
+    <!-- 更新推荐人数 -->
+    <update id="updateReNumber" parameterType="pd">
+        update
+        <include refid="tableName"/>
+        set
+        "RECOMMENDED_NUMBER" = "RECOMMENDED_NUMBER" + 1
+        where
+        "ACCOUNT_ID" = #{ACCOUNT_ID}
+    </update>
+
+    <!-- 更新有效会员人数 -->
+    <update id="updatEmemberAmount" parameterType="pd">
+        update
+        <include refid="tableName"/>
+        set
+        "EFFECTIVE_MEMBER" = "EFFECTIVE_MEMBER" + 1
+        where
+        "ACCOUNT_ID" in (${RE_PATH})
+    </update>
+
+    <!-- 更新团队业绩 -->
+    <update id="updateTeamSum" parameterType="pd">
+        update
+        <include refid="tableName"/>
+        set
+        <if test="tag == '+' ">
+            "TEAM_ACHIEVE" = "TEAM_ACHIEVE" + ${money}
+        </if>
+        <if test="tag == '-' ">
+            "TEAM_ACHIEVE" = "TEAM_ACHIEVE" - ${money}
+        </if>
+        where
+        "ACCOUNT_ID" in (${RE_PATH})
+    </update>
+
+    <!-- 增加动静态累积 -->
+    <update id="addAccumula" parameterType="pd">
+        update
+        <include refid="tableName"/>
+        set
+        "ACCUMULA" = "ACCUMULA" + ${money}
+        where
+        "ACCOUNT_ID" = #{ACCOUNT_ID}
+    </update>
+
+    <!-- 增加用户余额 -->
+    <update id="addMoney" parameterType="pd">
+        update
+        <include refid="tableName"/>
+        set
+        <if test="XMC_WALLET != null and XMC_WALLET != '' ">
+            "XMC_WALLET" = "XMC_WALLET" + ${XMC_WALLET},
+        </if>
+        <if test="XMC_COUNT != null and XMC_COUNT != '' ">
+            "XMC_COUNT" = "XMC_COUNT" + ${XMC_COUNT},
+        </if>
+        <if test="USDT_WALLET != null and USDT_WALLET != '' ">
+            "USDT_WALLET" = "USDT_WALLET" + ${USDT_WALLET},
+        </if>
+        <if test="USDT_COUNT != null and USDT_COUNT != '' ">
+            "USDT_COUNT" = "USDT_COUNT" + ${USDT_COUNT},
+        </if>
+        <if test="HEDGING_USDT != null and HEDGING_USDT != '' ">
+            "HEDGING_USDT" = "HEDGING_USDT" + ${HEDGING_USDT},
+        </if>
+        <if test="HEDGING_XMC != null and HEDGING_XMC != '' ">
+            "HEDGING_XMC" = "HEDGING_XMC" + ${HEDGING_XMC},
+        </if>
+        "GMT_MODIFIED" = #{GMT_MODIFIED}
+        where
+        "ACCOUNT_ID" = #{ACCOUNT_ID}
+    </update>
+
+    <!-- 减少用户余额 -->
+    <update id="reduceMoney" parameterType="pd">
+        update
+        <include refid="tableName"/>
+        set
+        <if test="XMC_WALLET != null and XMC_WALLET != '' ">
+            "XMC_WALLET" = "XMC_WALLET" - ${XMC_WALLET},
+        </if>
+        <if test="XMC_COUNT != null and XMC_COUNT != '' ">
+            "XMC_COUNT" = "XMC_COUNT" - ${XMC_COUNT},
+        </if>
+        <if test="USDT_WALLET != null and USDT_WALLET != '' ">
+            "USDT_WALLET" = "USDT_WALLET" - ${USDT_WALLET},
+        </if>
+        <if test="USDT_COUNT != null and USDT_COUNT != '' ">
+            "USDT_COUNT" = "USDT_COUNT" - ${USDT_COUNT},
+        </if>
+        <if test="HEDGING_USDT != null and HEDGING_USDT != '' ">
+            "HEDGING_USDT" = "HEDGING_USDT" - ${HEDGING_USDT},
+        </if>
+        <if test="HEDGING_XMC != null and HEDGING_XMC != '' ">
+            "HEDGING_XMC" = "HEDGING_XMC" - ${HEDGING_XMC},
+        </if>
+        "GMT_MODIFIED" = #{GMT_MODIFIED}
+        where
+        "ACCOUNT_ID" = #{ACCOUNT_ID}
+    </update>
+
+    <!-- 重置顶点账号信息 -->
+    <update id="resetAccount" parameterType="pd">
+        update
+        <include refid="tableName"/>
+        set
+        "RE_PATH" = '',
+        "XMC_WALLET" = 10000,
+        "USDT_WALLET" = 10000,
+        "HEDGING_USDT" = 10000,
+        "HEDGING_XMC" = 10000,
+        "ALGEBRA" = 0,
+        "TEAM_AMOUNT" = 0,
+        "TEAM_ACHIEVE" = 0,
+        "RECOMMENDED_NUMBER" = 0,
+        "IS_SIGN_IN" = 0,
+        "USDT_WALLET_BALANCE" = 0,
+        "ACCUMULA" = 0,
+        "USDT_COUNT" = 0,
+        "XMC_COUNT" = 0,
+        "INVEST_NUMBER" = 0,
+        "EFFECTIVE_MEMBER" = 0,
+        "GLOBAL_TIME" = '2020-01-01 12:00:00',
+        "ACCOUNT_ID" = "ACCOUNT_ID"
+        where
+        "ACCOUNT_ID" = '10000'
+    </update>
+
+    <!-- 循环字段修改 -->
+    <update id="updateFor" parameterType="pd">
+        update
+        <include refid="tableName"/>
+        set
+        <foreach item="item" collection="_parameter.keys"
+                 separator="," close="">
+            <if test="item != null and item != '' ">
+                ${item} = #{[${item}]}
+            </if>
+        </foreach>
+        where
+        "ACCOUNT_ID" = #{ACCOUNT_ID}
+    </update>
+
+    <!-- 每天重置 -->
+    <update id="resetDaily" parameterType="pd">
+        update
+        <include refid="tableName"/>
+        set
+        "IS_SIGN_IN" = 0
+    </update>
+
+    <!-- 通过ID获取数据 -->
+    <select id="findById" parameterType="pd" resultType="pd">
+        select
+        <include refid="Field"/>
+        from
+        <include refid="tableName"/>
+        where
+        "ACCOUNT_ID" = #{ACCOUNT_ID}
+    </select>
+
+    <!-- 通过邀请码获取数据 -->
+    <select id="findByCode" parameterType="pd" resultType="pd">
+        select
+        <include refid="Field"/>
+        from
+        <include refid="tableName"/>
+        where
+        "INVITA_COD" = #{INVITA_COD}
+    </select>
+
+    <!-- 查询直推人数 -->
+    <select id="getReCount" parameterType="pd" resultType="pd">
+        select
+        COUNT("ACCOUNT_ID") AS RE_COUNT
+        from
+        <include refid="tableName"/>
+        where
+        "RECOMMENDER" = #{ACCOUNT_ID}
+    </select>
+
+    <!-- 获取所有用户累积 -->
+    <select id="getAllCount" parameterType="pd" resultType="pd">
+        select
+        COUNT("ACCOUNT_ID") AS ALL_COUNT
+        from
+        <include refid="tableName"/>
+    </select>
+
+    <!-- 通过邮箱获取数据 -->
+    <select id="findByEmail" parameterType="pd" resultType="pd">
+        select
+        <include refid="Field"/>
+        from
+        <include refid="tableName"/>
+        where
+        "MAILBOX" = #{MAILBOX}
+    </select>
+
+    <!-- 通过用户名获取数据 -->
+    <select id="findByUserName" parameterType="pd" resultType="pd">
+        select
+        <include refid="Field"/>
+        from
+        <include refid="tableName"/>
+        where
+        "USER_NAME" = #{USER_NAME}
+    </select>
+
+    <!-- 通过ID查询数据，返回实体类 -->
+    <select id="findByIdReturnEntity" parameterType="pd" resultMap="MemUserMap">
+        select
+        <include refid="Field"/>
+        from
+        <include refid="tableName"/>
+        where
+        "ACCOUNT_ID" = #{ACCOUNT_ID}
+    </select>
+
+    <!-- 列表 -->
+    <select id="datalistPage" parameterType="page" resultType="pd">
+        select
+        <include refid="Field"/>
+        from
+        <include refid="tableName"/>
+        where 1=1
+        /*搜索类型*/
+        <if test="pd.name != null and pd.name != '' ">
+            <if test="pd.keywords!= null and pd.keywords != ''"><!-- 关键词检索 -->
+                and
+                (
+                ${pd.name} LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%')
+                )
+            </if>
+        </if>
+        <if test="pd.name == null or pd.name == '' ">
+            <if test="pd.keywords!= null and pd.keywords != ''"><!-- 关键词检索 -->
+                and
+                (
+                "USER_NAME" LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%')
+                or
+                "MAILBOX" LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%')
+                or
+                "RECOMMENDER" LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%')
+                or
+                "NAME" LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%')
+                )
+            </if>
+        </if>
+        /*时间段搜索*/
+        <if test="pd.lastStart != null and pd.lastStart != '' ">
+            and
+            "GMT_CREATE" &gt;= #{pd.lastStart}
+        </if>
+        <if test="pd.lastEnd!= null and pd.lastEnd != '' ">
+            and
+            "GMT_CREATE" &lt;= ( SELECT TO_CHAR(( SELECT to_date( #{pd.lastEnd}, 'yyyy-mm-dd' ) + 1 FROM dual ),
+            'yyyy-mm-dd' ) FROM dual )
+        </if>
+        order by "ACCOUNT_ID"
+    </select>
+
+    <!-- 列表(全部) -->
+    <select id="listAll" parameterType="pd" resultType="pd">
+        select
+        <include refid="Field"/>
+        from
+        <include refid="tableName"/>
+        order by "ACCOUNT_ID"
+    </select>
+
+    <!-- 列表(所有下级) -->
+    <select id="listByDownUserId" parameterType="pd" resultType="pd">
+        select
+        <include refid="Field"/>
+        from
+        <include refid="tableName"/>
+        where
+        "RE_PATH" LIKE CONCAT(CONCAT('%', #{ACCOUNT_ID}),'%')
+        <if test="rank != null and rank != '' ">
+            and
+            "USER_RANK" = ${rank}
+        </if>
+        order by "ACCOUNT_ID" DESC
+    </select>
+
+    <!-- 列表(所有上级) -->
+    <select id="listByUpperUserId" parameterType="pd" resultType="pd">
+        select
+        <include refid="Field"/>
+        from
+        <include refid="tableName"/>
+        where
+        "ACCOUNT_ID" in (${RE_PATH})
+        order by "ACCOUNT_ID" DESC
+    </select>
+
+    <!-- 列表(根据推荐人查询) -->
+    <select id="listByRecommender" parameterType="pd" resultType="pd">
+        SELECT
+        *
+        FROM
+        FT_ACCOUNT A,
+        FT_RANK B
+        WHERE
+        A.RECOMMENDER = ${ACCOUNT_ID}
+        AND A.USER_RANK = B.RANK_ID (+)
+        ORDER BY
+        A.ACCOUNT_ID DESC
+        <!--
+                select
+                <include refid="Field"/>
+                from
+                <include refid="tableName"/>
+                where
+                    "RECOMMENDER" = ${ACCOUNT_ID}
+                    order by "ACCOUNT_ID" DESC-->
+    </select>
+
+    <!-- 列表(通过for循环字段) -->
+    <select id="listByFor" parameterType="pd" resultType="pd">
+        select
+        <include refid="Field"/>
+        from
+        <include refid="tableName"/>
+        where
+        "ACCOUNT_ID" != #{ACCOUNT_ID}
+        and
+        <foreach item="item" collection="_parameter.keys"
+                 separator="and" close="">
+            <if test="item != null and item != '' and item != 'ACCOUNT_ID' ">
+                ${item} = #{[${item}]}
+            </if>
+        </foreach>
+
+    </select>
+
+    <!-- 批量删除 -->
+    <delete id="deleteAll" parameterType="String">
+        delete from
+        <include refid="tableName"></include>
+        where
+        "ACCOUNT_ID" in
+        <foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
+
+    <!-- fh313596790qq(青苔) -->
+</mapper>

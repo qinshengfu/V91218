@@ -1,0 +1,17 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="V91218">
+    <output-path>$PROJECT_DIR$/out/artifacts/V91218</output-path>
+    <root id="archive" name="V91218.war">
+      <element id="dir-copy" path="$PROJECT_DIR$/WebRoot" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="V91218" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="lib" />
+        </element>
+      </element>
+      <element id="javaee-facet-resources" facet="V91218/web/Web" />
+    </root>
+  </artifact>
+</component>
